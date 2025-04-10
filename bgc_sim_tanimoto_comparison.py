@@ -104,19 +104,19 @@ outfile = open(outfile_name, 'w')
 (spearman_r, spearman_p) = scipy.stats.spearmanr(bgc_score_list, tanimoto_list) 
 
 print("Spearman correlation for all BGCs: " + str(spearman_r) + " p-value: " + str(spearman_p)) 
-outfile.write("Spearman correlation for all BGCs: " + str(spearman_r) + " p-value: " + str(spearman_p))
+outfile.write("Spearman correlation for all BGCs: " + str(spearman_r) + " p-value: " + str(spearman_p) + "\n")
 
 print("Correlation for BGCs by class including hybrids")
-outfile.write("Correlation for BGCs by class including hybrids")
+outfile.write("Correlation for BGCs by class including hybrids" + "\n")
 for c in hybrid_bgc_score:
     (spearman_r, spearman_p) = scipy.stats.spearmanr(hybrid_bgc_score[c], hybrid_tanimoto_score[c]) 
     print("Spearman correlation for " + c + " BGCs: " + str(spearman_r) + " p-value: " + str(spearman_p))
-    outfile.write("Spearman correlation for " + c + " BGCs: " + str(spearman_r) + " p-value: " + str(spearman_p))
+    outfile.write("Spearman correlation for " + c + " BGCs: " + str(spearman_r) + " p-value: " + str(spearman_p) + "\n")
     
 print("Correlation for BGCs by class excluding hybrids")
 outfile.write("Correlation for BGCs by class excluding hybrids")
 for c in no_hybrid_bgc_score:
     (spearman_r, spearman_p) = scipy.stats.spearmanr(no_hybrid_bgc_score[c], no_hybrid_tanimoto_score[c]) 
     print("Spearman correlation for " + c + " BGCs: " + str(spearman_r) + " p-value: " + str(spearman_p))
-    outfile.write("Spearman correlation for " + c + " BGCs: " + str(spearman_r) + " p-value: " + str(spearman_p))
+    outfile.write("Spearman correlation for " + c + " BGCs: " + str(spearman_r) + " p-value: " + str(spearman_p) + "\n")
 outfile.close()
