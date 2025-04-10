@@ -1,7 +1,7 @@
 # BGC-clustering-benchmark
 Methods for benchmarking BGC similarity comparison and clustering based on structural similarity of produts
 
-#1. Calculating Tanimoto similarity of a database
+# 1. Calculating Tanimoto similarity of a database
 Note we have precalculated the tanimoto similiarities, but if you want to do it yourself, you can use the calculate_structural_similarity.py script. To do this:
 run:
 
