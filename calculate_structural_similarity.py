@@ -13,7 +13,7 @@ import numpy as np
 import argparse
 
 parser = argparse.ArgumentParser(description='Calculates tanimoto similarity between NPs in dataset')
-parser.add_argument('-f', '--filename', type=str, default='source_data/NPAtlas_bm_v1.tsv', help='file containgin NP structural information in the NPAtlas format')
+parser.add_argument('-f', '--filename', type=str, default='source_data/NPAtlas_bm_v1.tsv', help='file containing NP structural information in the NPAtlas format')
 parser.add_argument('-o', '--outfile_name', type=str, default='tanimoto_results/NPAtlas_bm_v1.tsv', help='file to write tanimoto results to')
 args = parser.parse_args()
 infile_name = args.filename
