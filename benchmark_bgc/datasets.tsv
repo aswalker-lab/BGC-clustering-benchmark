@@ -1,0 +1,2 @@
+# Dataset name	Path to folder	Path to taxonomy	Description
+antismash7_results	./antismash7_results	./antismash7_results/mibig_taxonomy.tsv	MiBig clusters
