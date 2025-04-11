@@ -79,11 +79,9 @@ outfile = open(butina_outfile_name,'w')
 i = 0
 bgc_labels = {}
 for c in clusters:
-    outfile.write(str(i))
     for idx in c:
         outfile.write(bgc_list[idx] + "," + str(i) + "\n")
         bgc_labels[bgc_list[idx]] = i
-    outfile.write("\n")
     i += 1
 outfile.close()
 
