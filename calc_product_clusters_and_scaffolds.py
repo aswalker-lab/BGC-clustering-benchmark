@@ -23,8 +23,8 @@ import argparse
 parser = argparse.ArgumentParser(description='Compares BGC similarity to Tanimoto similarity')
 parser.add_argument('-t', '--tanimoto_file', type=str, default='tanimoto_results/NPAtlas_bm_v1.tsv', help='file containing tanimoto comparison of product structures')
 parser.add_argument('-c', '--butina_threshold', type=float, default=0.2, help='Butina cluster threshold')
-parser.add_argument('-o', '--butina_outfile_name', type=str, default='product_clusters/butina_clusters_pt2.csv', help='file to write butina clusters to')
-parser.add_argument('-o', '--scaffolds_outfile_name', type=str, default='product_scaffolds/bm_scaffolds.csv', help='file to write scaffolds to')
+parser.add_argument('-b', '--butina_outfile_name', type=str, default='product_clusters/butina_clusters_pt2.csv', help='file to write butina clusters to')
+parser.add_argument('-s', '--scaffolds_outfile_name', type=str, default='product_scaffolds/bm_scaffolds.csv', help='file to write scaffolds to')
 
 args = parser.parse_args()
 tanimoto_file = args.tanimoto_file
