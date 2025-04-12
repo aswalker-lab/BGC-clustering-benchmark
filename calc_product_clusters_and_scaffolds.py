@@ -49,7 +49,7 @@ def cluster_fingerprints(distance_matrix, num_cmpds, cutoff=0.2):
     clusters = sorted(clusters, key=len, reverse=True)
     return clusters
 
-def get_scaffold(mol,scaffold_type="real_bm",use_csk=False,use_bajorath=False):
+def get_scaffold(mol,scaffold_type="real_bm"):
     """Get scaffolds for a molecule
 
     Parameters:
@@ -68,7 +68,7 @@ def get_scaffold(mol,scaffold_type="real_bm",use_csk=False,use_bajorath=False):
     if scaffold_type == "bajorath":
         scaff=AllChem.DeleteSubstructs(scaff, PATT)
     if scaffold_type == "real_bm":
-        scaff=AllChem.ReplaceSubstructs(scaff,PATT,REPL,replaceAll=True)[0]                                          
+        scaff=AllChem.ReplaceSubstructs(scaff,PATT,REPL,replaceAll=True)[0]                                      
     if scaffold_type == "csk":
         scaff=MurckoScaffold.GetScaffoldForMol(scaff)
     return scaff
@@ -172,8 +172,8 @@ for bgc in smiles_dic:
         mol = Chem.MolFromSmiles(smiles)
         Chem.SanitizeMol(mol)
         molecules[bgc].append(mol)
-        if scaffold_type == "true_bm":
-            scaffold=get_scaffold(mol,scaffold_type ="true_bm")
+        if scaffold_type == "real_bm":
+            scaffold=get_scaffold(mol,scaffold_type ="real_bm")
         elif scaffold_type == "csk":
             scaffold=get_scaffold(mol,scaffold_type = "csk")
         else:
