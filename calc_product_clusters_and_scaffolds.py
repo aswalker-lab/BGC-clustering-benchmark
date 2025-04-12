@@ -3,7 +3,8 @@
 Created on Fri Apr 11 13:35:43 2025
 
 @author: Allison Walker
-adapted from https://projects.volkamerlab.org/teachopencadd/talktorials/T005_compound_clustering.html
+Butina clustering adapted from https://projects.volkamerlab.org/teachopencadd/talktorials/T005_compound_clustering.html
+Scaffold determination adapted from https://github.com/rdkit/rdkit/discussions/6844
 """
 
 import pandas as pd
@@ -19,18 +20,23 @@ from rdkit.Chem import DataStructs
 import argparse
 from sklearn import metrics
 import argparse
+from rdkit.Chem.Scaffolds import MurckoScaffold
 
 parser = argparse.ArgumentParser(description='Compares BGC similarity to Tanimoto similarity')
 parser.add_argument('-t', '--tanimoto_file', type=str, default='tanimoto_results/NPAtlas_bm_v1.tsv', help='file containing tanimoto comparison of product structures')
+parser.add_argument('-n', '--npatlas_filename', type=str, default='source_data/NPAtlas_bm_v1.tsv', help='file containing NP structural information in the NPAtlas format')
 parser.add_argument('-c', '--butina_threshold', type=float, default=0.2, help='Butina cluster threshold')
 parser.add_argument('-b', '--butina_outfile_name', type=str, default='product_clusters/butina_clusters_pt2.csv', help='file to write butina clusters to')
 parser.add_argument('-s', '--scaffolds_outfile_name', type=str, default='product_scaffolds/bm_scaffolds.csv', help='file to write scaffolds to')
+parser.add_argument('-st', '--scaffold_type', type=str, default='real_bm', choices=['reakl_bm','csk','bajorath'], help='type of scaffold to calculate')
 
 args = parser.parse_args()
 tanimoto_file = args.tanimoto_file
+npatlas_filename = args.npatlas_filename
 butina_outfile_name = args.butina_outfile_name
 butina_threshold = args.butina_threshold
 scaffolds_outfile_name = args.scaffolds_outfile_name
+scaffold_type = args.scaffold_type
 
 def cluster_fingerprints(distance_matrix, num_cmpds, cutoff=0.2):
     """Cluster fingerprints
@@ -43,6 +49,29 @@ def cluster_fingerprints(distance_matrix, num_cmpds, cutoff=0.2):
     clusters = sorted(clusters, key=len, reverse=True)
     return clusters
 
+def get_scaffold(mol,scaffold_type="real_bm",use_csk=False,use_bajorath=False):
+    """Get scaffolds for a molecule
+
+    Parameters:
+    mol : rdkit molecule.
+    scaffold type : String indicating scaffold type
+        options are real_bm, bajorath, csk
+        The default is real_bm
+    
+    Returns the scaffold
+
+    """
+    PATT=Chem.MolFromSmarts("[$([D1]=[*])]")
+    REPL=Chem.MolFromSmarts("[*]")
+    Chem.RemoveStereochemistry(mol) #important for canonization of CSK!
+    scaff=MurckoScaffold.GetScaffoldForMol(mol)
+    if scaffold_type == "bajorath":
+        scaff=AllChem.DeleteSubstructs(scaff, PATT)
+    if scaffold_type == "real_bm":
+        scaff=AllChem.ReplaceSubstructs(scaff,PATT,REPL,replaceAll=True)[0]                                          
+    if scaffold_type == "csk":
+        scaff=MurckoScaffold.GetScaffoldForMol(scaff)
+    return scaff
 
 tanimoto_matrix = pd.read_csv(tanimoto_file)
 tanimoto_matrix.set_index('MiBIG_ID', inplace=True)
@@ -99,3 +128,55 @@ for i in range(0, len(distance_matrix)):
 #calculate silhouette score of clustering
 sil = metrics.silhouette_score(np_dist_matrix, numpy.array(label_list), metric='precomputed')
 print("Silhouette score: " + str(sil))
+
+#load structures for scaffold calculation
+NP_atlas_tsv = open(npatlas_filename, encoding="utf8")
+
+smiles_dic = {}
+for line in NP_atlas_tsv:
+    if "npaid" in line:
+        continue
+    split_line = line.split("\t")
+    if len(split_line) < 29:
+        continue
+    smiles =split_line[10]
+    mibig = split_line[28]
+    mibig = mibig.replace("'","")
+    mibig = mibig.replace("[","").replace("]","").replace(" ","")
+    if len(mibig) < 1:
+        mibig_list = []
+    else:
+        mibig_list = mibig.split(",")
+
+    for bgc in mibig_list:
+        if bgc not in smiles_dic:
+            smiles_dic[bgc] = []
+        smiles_dic[bgc].append(smiles)
+        
+molecules = {}
+scaffolds = {}
+
+bgc_list = []
+outfile = open(scaffolds_outfile_name,'w')
+for bgc in smiles_dic:
+    smiles = smiles_dic[bgc][0]
+
+        
+    bgc_list.append(bgc.replace("\n",""))
+    if bgc not in molecules:
+        molecules[bgc] = []
+        scaffolds[bgc] = []
+        
+        
+    for smiles in smiles_dic[bgc]:
+        mol = Chem.MolFromSmiles(smiles)
+        Chem.SanitizeMol(mol)
+        molecules[bgc].append(mol)
+        if scaffold_type == "true_bm":
+            scaffold=get_scaffold(mol,scaffold_type ="true_bm")
+        elif scaffold_type == "csk":
+            scaffold=get_scaffold(mol,scaffold_type = "csk")
+        else:
+            scaffold=get_scaffold(mol,scaffold_type = "bajorath")
+        outfile.write(bgc + "," + Chem.MolToSmiles(scaffold) + "\n")  
+outfile.close()
