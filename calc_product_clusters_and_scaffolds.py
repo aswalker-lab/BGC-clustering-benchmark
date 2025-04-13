@@ -28,7 +28,7 @@ parser.add_argument('-n', '--npatlas_filename', type=str, default='source_data/N
 parser.add_argument('-c', '--butina_threshold', type=float, default=0.2, help='Butina cluster threshold')
 parser.add_argument('-b', '--butina_outfile_name', type=str, default='product_clusters/butina_clusters_pt2.csv', help='file to write butina clusters to')
 parser.add_argument('-s', '--scaffolds_outfile_name', type=str, default='product_scaffolds/bm_scaffolds.csv', help='file to write scaffolds to')
-parser.add_argument('-st', '--scaffold_type', type=str, default='real_bm', choices=['reakl_bm','csk','bajorath'], help='type of scaffold to calculate')
+parser.add_argument('-st', '--scaffold_type', type=str, default='real_bm', choices=['real_bm','csk','bajorath'], help='type of scaffold to calculate')
 
 args = parser.parse_args()
 tanimoto_file = args.tanimoto_file
