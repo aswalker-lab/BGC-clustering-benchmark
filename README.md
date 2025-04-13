@@ -1,8 +1,10 @@
 # BGC-clustering-benchmark
 Methods for benchmarking BGC similarity comparison and clustering based on structural similarity of produts
 
+# Required dependencies
+
 # 1. Calculating Tanimoto similarity of a database
-Note we have precalculated the tanimoto similiarities, but if you want to do it yourself, you can use the calculate_structural_similarity.py script. To do this:
+Note we have precalculated the tanimoto similiarities, if you want to use these precalculated values, proceed to step 2. If you want to do it yourself, you can use the calculate_structural_similarity.py script. To do this:
 run:
 
 python calculate_structural_similarity.py
@@ -18,4 +20,13 @@ To calculate similarity metrics use the bgc_sim_tanimoto_comparison.py script, t
 
 python bgc_sim_tanimoto_comparison.py MY_BGC_DATA.csv
 
-optional arguments are -t which specifies the tanimoto similarity file, -c which specifies the file which provides the biosynthetic classes of each BGC, -o which specifies the output file name, and -g which specifies the output file name to write a graph showing the correlation between the BGC similarity and Tanimoto similarity.
+optional arguments are -t which specifies the tanimoto similarity file, -c which specifies the file which provides the biosynthetic classes of each BGC, -o which specifies the output file name, and -g which specifies the output file name to write a graph showing the correlation between the BGC similarity and Tanimoto similarity. -t and -c should be used if the user wants to calculate these metrics for their own custom dataset.
+
+# 3. Calculate clusters and scaffolds for product structures
+We have provided precalculated clusters using the Butina algorithm and scaffolds using the Bemis-Murcko scaffold definition. If you want to use these precalculated clusters, proceed to 4. If you want to calculate these yourself then use the calc_product_clusters_and_scaffolds.py script by running:
+
+python calc_product_clusters_and_scaffolds.py
+
+If you want to run this on your own dataset, use the -t option to specify Tanimoto similarity file (which can be generated as described in 1) and -n to specify the database in the NPAtlas database format. Other options for this method include -c which specifies the Butina clustering threshold, -b which specifies the output file for the Butina clusters, -s which specifies the output file for scaffolds, and -st which specifies the scaffold type which include Bemis Murcko (true_bm), Cyclic Skeleton (csk), and Bajorath Bemis Murcko (bajorath). Note these scaffold types are described here: https://github.com/rdkit/rdkit/discussions/6844
+
+# 4. Calculate clustering metrics
