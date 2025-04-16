@@ -233,7 +233,7 @@ print("average gcfs per scaffold: " + str(average_gcf_counts/len(gcfs_per_scaffo
 outfile.write("average gcfs per scaffold: " + str(average_gcf_counts/len(gcfs_per_scaffold)) + "\n")
 axs[1].hist(number_list)
 axs[1].set_yscale('log')
-axs[1].set_xlabel("GCFs per Scaffold",fontsize=16)
+axs[1].set_xlabel("Scaffolds per GCF",fontsize=16)
 axs[1].set_ylabel("Log Frequency",fontsize=16)
 fig.set_constrained_layout(True)
 fig.savefig(outfile_histogram)
