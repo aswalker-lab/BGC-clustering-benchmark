@@ -49,7 +49,7 @@ fingerprints = {}
 avg_fingerprints = {}
 fingerprint_counts = {}
 
-fpgen = AllChem.GetRDKitFPGenerator(fpSize=16384)#fpSize=4096
+fpgen = AllChem.GetRDKitFPGenerator(fpSize=16384)
 for bgc in smiles_dic:
     if bgc not in molecules:
         molecules[bgc] = []
