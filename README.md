@@ -2,7 +2,7 @@
 Methods for benchmarking BGC similarity comparison and clustering based on structural similarity of produts
 
 # Required dependencies
-The following packages need to be installed to run the scripts, version numbers we have used/tested are listed:\n
+The following packages need to be installed to run the scripts, version numbers we have used/tested are listed:<br/>
 matplotlib 3.8.3
 numpy 1.26.4
 pandas 2.1.1
