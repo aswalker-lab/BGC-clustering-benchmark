@@ -3,12 +3,12 @@ Methods for benchmarking BGC similarity comparison and clustering based on struc
 
 # Required dependencies
 The following packages need to be installed to run the scripts, version numbers we have used/tested are listed:<br/>
-matplotlib 3.8.3
-numpy 1.26.4
-pandas 2.1.1
-rdkit 2023.9.5
-scikit-learn 1.4.1.post1
-scipy 1.12.0
+matplotlib 3.8.3<br/>
+numpy 1.26.4<br/>
+pandas 2.1.1<br/>
+rdkit 2023.9.5<br/>
+scikit-learn 1.4.1.post1<br/>
+scipy 1.12.0<br/>
 
 We used python version 3.11.8
 # 1. Calculating Tanimoto similarity of a database
