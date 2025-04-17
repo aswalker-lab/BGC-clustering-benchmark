@@ -9,17 +9,12 @@ Scaffold determination adapted from https://github.com/rdkit/rdkit/discussions/6
 
 import pandas as pd
 import numpy
-import matplotlib.pyplot as plt
 from rdkit import Chem
 from rdkit import DataStructs
 from rdkit.ML.Cluster import Butina
-from rdkit.Chem import Draw
-from rdkit.Chem import rdFingerprintGenerator
 from rdkit.Chem import AllChem 
-from rdkit.Chem import DataStructs
 import argparse
 from sklearn import metrics
-import argparse
 from rdkit.Chem.Scaffolds import MurckoScaffold
 
 parser = argparse.ArgumentParser(description='Compares BGC similarity to Tanimoto similarity')
