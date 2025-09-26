@@ -12,7 +12,7 @@ scipy 1.12.0<br/>
 
 We used python version 3.11.8
 # 1. Quick start example - calculating metrics for BiG-SCAPE
-
+In this example, we will walk through the commands needed to calculate the metrics for BiG-SCAPE. All files needed for these calculations are available in this repository.
 # 2. Reproducing manuscript results
 
 # 3. Calculating Tanimoto similarity of a database
