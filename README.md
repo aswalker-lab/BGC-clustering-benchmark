@@ -13,30 +13,30 @@ scipy 1.12.0<br/>
 We used python version 3.11.8
 # 1. Quick start example - calculating metrics for BiG-SCAPE
 In this example, we will walk through the commands needed to calculate the metrics for BiG-SCAPE. All files needed for these calculations are available in this repository. <br/>
-First, we will calculate the BiG-SCAPE score similarity (with a cutoff of 1) with the tanimoto similarity of the natural product structures:
+First, we will calculate the BiG-SCAPE score similarity (with a cutoff of 1) with the tanimoto similarity of the natural product structures:<br/>
 
-python bgc_sim_tanimoto_comparison.py bgc_similarities/bigscape_similarity_score_1.csv
+python bgc_sim_tanimoto_comparison.py bgc_similarities/bigscape_similarity_score_1.csv<br/>
 
-This should give the following output:
-Spearman correlation for all BGCs: 0.26241098933113927 p-value: 0.0
-Correlation for BGCs by class including hybrids
-Spearman correlation for nrp BGCs: 0.38465815188304414 p-value: 0.0
-Spearman correlation for pk BGCs: 0.2177584748253037 p-value: 0.0
-Spearman correlation for other BGCs: 0.19570603600077444 p-value: 5.459433818024757e-21
-Spearman correlation for saccharide BGCs: 0.48720203647295657 p-value: 9.436521598010217e-104
-Spearman correlation for alkaloid BGCs: 0.2670178688179637 p-value: 1.083344586678205e-07
-Spearman correlation for ripp BGCs: 0.48798455796314605 p-value: 1.2774619066097752e-117
-Spearman correlation for terpene BGCs: 0.1472551792672899 p-value: 2.073683717580056e-06
-Spearman correlation for thiopeptide BGCs: 0.8181818181818182 p-value: 0.0038149200825507135
-Correlation for BGCs by class excluding hybrids
-Spearman correlation for nrp BGCs: 0.523339264796893 p-value: 0.0
-Spearman correlation for pk BGCs: 0.30909895266060433 p-value: 0.0
-Spearman correlation for other BGCs: 0.2058057692547843 p-value: 9.178171887832283e-17
-Spearman correlation for alkaloid BGCs: 0.3831956931511358 p-value: 2.1216918503063743e-07
-Spearman correlation for ripp BGCs: 0.5118636561015937 p-value: 7.718032859783966e-122
-Spearman correlation for saccharide BGCs: 0.5701519606735296 p-value: 4.842313343204816e-16
-Spearman correlation for terpene BGCs: 0.23408917978486965 p-value: 3.398995697880516e-07
-Spearman correlation for thiopeptide BGCs: 0.8181818181818182 p-value: 0.0038149200825507135
+This should give the following output:<br/>
+Spearman correlation for all BGCs: 0.26241098933113927 p-value: 0.0<br/>
+Correlation for BGCs by class including hybrids<br/>
+Spearman correlation for nrp BGCs: 0.38465815188304414 p-value: 0.0<br/>
+Spearman correlation for pk BGCs: 0.2177584748253037 p-value: 0.0<br/>
+Spearman correlation for other BGCs: 0.19570603600077444 p-value: 5.459433818024757e-21<br/>
+Spearman correlation for saccharide BGCs: 0.48720203647295657 p-value: 9.436521598010217e-104<br/>
+Spearman correlation for alkaloid BGCs: 0.2670178688179637 p-value: 1.083344586678205e-07<br/>
+Spearman correlation for ripp BGCs: 0.48798455796314605 p-value: 1.2774619066097752e-117<br/>
+Spearman correlation for terpene BGCs: 0.1472551792672899 p-value: 2.073683717580056e-06<br/>
+Spearman correlation for thiopeptide BGCs: 0.8181818181818182 p-value: 0.0038149200825507135<br/>
+Correlation for BGCs by class excluding hybrids<br/>
+Spearman correlation for nrp BGCs: 0.523339264796893 p-value: 0.0<br/>
+Spearman correlation for pk BGCs: 0.30909895266060433 p-value: 0.0<br/>
+Spearman correlation for other BGCs: 0.2058057692547843 p-value: 9.178171887832283e-17<br/>
+Spearman correlation for alkaloid BGCs: 0.3831956931511358 p-value: 2.1216918503063743e-07<br/>
+Spearman correlation for ripp BGCs: 0.5118636561015937 p-value: 7.718032859783966e-122<br/>
+Spearman correlation for saccharide BGCs: 0.5701519606735296 p-value: 4.842313343204816e-16<br/>
+Spearman correlation for terpene BGCs: 0.23408917978486965 p-value: 3.398995697880516e-07<br/>
+Spearman correlation for thiopeptide BGCs: 0.8181818181818182 p-value: 0.0038149200825507135<br/>
 
 Which matches the values for the updated dataset in the supplementary data of the paper.
 
