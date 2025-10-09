@@ -59,7 +59,13 @@ python calculate_clustering_metrics.py bgc_clusters/bigscape_clusters_1.csv bgc_
 The above outputs match the values for the updated dataset in the supplementary data of the paper.
 
 # 2. Reproducing manuscript results
-
+To reproduce the remaining manuscript results with the udpated benchmark set replace the similarity and cluster files with those of each method, the files for each method are:<br/>
+knownclusterblast: bgc_similarities/kcb_similarity_score.csv<br/>
+BiG-SCAPE 0.3 cutoff: bgc_similarities/bigscape_similarity_score_pt3.csv bgc_clusters/bigscape_clusters_pt3.csv<br/>
+BiG-SCAPE 0.5 cutoff: bgc_similarities/bigscape_similarity_score_pt5.csv bgc_clusters/bigscape_clusters_pt5.csv<br/>
+BiG-SLiCE: bgc_similarities/bigslice_scores.csv bgc_clusters/bigslice_clusters.csv<br/>
+clust-o-matic: bgc_similarities/clustomatic_scores.csv bgc_clusters/clustomatic_clusters.csv<br/>
+lsaBGC: bgc_similarities/lsaBGC_scores.csv bgc_clusters/lsaBGC_clusters.csv<br/>
 # 3. Calculating Tanimoto similarity of a database
 Note we have precalculated the tanimoto similiarities, if you want to use these precalculated values, proceed to step 2. If you want to do it yourself, you can use the calculate_structural_similarity.py script. To do this:
 run:
