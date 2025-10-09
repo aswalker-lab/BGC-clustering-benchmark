@@ -38,7 +38,25 @@ Spearman correlation for saccharide BGCs: 0.5701519606735296 p-value: 4.84231334
 Spearman correlation for terpene BGCs: 0.23408917978486965 p-value: 3.398995697880516e-07<br/>
 Spearman correlation for thiopeptide BGCs: 0.8181818181818182 p-value: 0.0038149200825507135<br/>
 
-Which matches the values for the updated dataset in the supplementary data of the paper.
+To calculate the clustering and scaffold count metrices for BiG-SCAPE with a cutoff of 1 run and Butina clustering of 0.2 the following command: <br/>
+python calculate_clustering_metrics.py bgc_clusters/bigscape_clusters_1.csv bgc_similarities/bigscape_similarity_score_1.csv sim <br/>
+This should give the following output:<br/>
+silhouette score: 0.0911359603157673<br/>
+tanimoto silhouette score: -0.03255407071175996<br/>
+rand score: 0.9933960790439741<br/>
+adjusted rand score: 0.12926602948395538<br/>
+mutual information: 0.24402727972809218<br/>
+homogeneity score: 0.7414732913152082<br/>
+completeness score: 0.9690745697100338<br/>
+v score: 0.840131898211955<br/>
+fowlkes mallow score: 0.20629330540337384<br/>
+average normalized scaffolds per gcf: 3.3450163398692823<br/>
+average gcfs per scaffold: 1.1370338248048568<br/>
+
+To calculate the clustering metrices for BiG-SCAPE with a cutoff of 1 run and Butina clustering of 0.3 the following command: <br/>
+python calculate_clustering_metrics.py bgc_clusters/bigscape_clusters_1.csv bgc_similarities/bigscape_similarity_score_1.csv sim -c product_clusters/butina_clusters_pt3.csv<br/>
+
+The above outputs match the values for the updated dataset in the supplementary data of the paper.
 
 # 2. Reproducing manuscript results
 
