@@ -59,12 +59,16 @@ hybrid_bgc_score = {}
 no_hybrid_bgc_score = {}
 hybrid_tanimoto_score = {}
 no_hybrid_tanimoto_score = {}
+
+max_bgc_score = 1
 for bgc1 in bgc_scores:
     if bgc1 not in tanimoto_matrix:
         continue
     for bgc2 in bgc_scores[bgc1]:
         if bgc2 not in tanimoto_matrix:
             continue
+        if bgc_scores[bgc1][bgc2] > max_bgc_score:
+            max_bgc_score = bgc_scores[bgc1][bgc2]
         bgc_score_list.append(bgc_scores[bgc1][bgc2])
         tanimoto_list.append(tanimoto_matrix[bgc1][bgc2])
         if bgc1 not in bgc_classes or bgc2 not in bgc_classes:
@@ -95,7 +99,7 @@ plt.scatter(bgc_score_list, tanimoto_list)
 plt.ylabel('Tanimoto Score', fontsize=18)
 plt.xlabel('BGC Score', fontsize=18)
 plt.ylim((0,1))
-plt.xlim((0,1))
+plt.xlim((0,max_bgc_score))
 plt.savefig(graphfile_name)
 
 outfile = open(outfile_name, 'w')
