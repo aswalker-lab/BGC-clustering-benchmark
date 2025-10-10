@@ -1,5 +1,5 @@
 # BGC-clustering-benchmark
-Methods for benchmarking BGC similarity comparison and clustering based on structural similarity of produts
+Methods for benchmarking BGC similarity comparison and clustering based on structural similarity of products. To use this code, first install the required dependencies listed below and clone the github repository. Section 1 provides a quick example using calculating metrics for BiG-SCAPE clustering. Section 2 provides a walkthrough of the steps necessary to reproduce the results in our manuscript. Sections 3-6 of this README provide a general overview of scripts and their function. 
 
 # Required dependencies
 The following packages need to be installed to run the scripts, version numbers we have used/tested are listed:<br/>
@@ -11,7 +11,62 @@ scikit-learn 1.4.1.post1<br/>
 scipy 1.12.0<br/>
 
 We used python version 3.11.8
-# 1. Calculating Tanimoto similarity of a database
+# 1. Quick start example - calculating metrics for BiG-SCAPE
+In this example, we will walk through the commands needed to calculate the metrics for BiG-SCAPE. All files needed for these calculations are available in this repository. <br/>
+First, we will calculate the BiG-SCAPE score similarity (with a cutoff of 1) with the tanimoto similarity of the natural product structures:<br/>
+
+python bgc_sim_tanimoto_comparison.py bgc_similarities/bigscape_similarity_score_1.csv<br/>
+
+This should give the following output:<br/>
+Spearman correlation for all BGCs: 0.26241098933113927 p-value: 0.0<br/>
+Correlation for BGCs by class including hybrids<br/>
+Spearman correlation for nrp BGCs: 0.38465815188304414 p-value: 0.0<br/>
+Spearman correlation for pk BGCs: 0.2177584748253037 p-value: 0.0<br/>
+Spearman correlation for other BGCs: 0.19570603600077444 p-value: 5.459433818024757e-21<br/>
+Spearman correlation for saccharide BGCs: 0.48720203647295657 p-value: 9.436521598010217e-104<br/>
+Spearman correlation for alkaloid BGCs: 0.2670178688179637 p-value: 1.083344586678205e-07<br/>
+Spearman correlation for ripp BGCs: 0.48798455796314605 p-value: 1.2774619066097752e-117<br/>
+Spearman correlation for terpene BGCs: 0.1472551792672899 p-value: 2.073683717580056e-06<br/>
+Spearman correlation for thiopeptide BGCs: 0.8181818181818182 p-value: 0.0038149200825507135<br/>
+Correlation for BGCs by class excluding hybrids<br/>
+Spearman correlation for nrp BGCs: 0.523339264796893 p-value: 0.0<br/>
+Spearman correlation for pk BGCs: 0.30909895266060433 p-value: 0.0<br/>
+Spearman correlation for other BGCs: 0.2058057692547843 p-value: 9.178171887832283e-17<br/>
+Spearman correlation for alkaloid BGCs: 0.3831956931511358 p-value: 2.1216918503063743e-07<br/>
+Spearman correlation for ripp BGCs: 0.5118636561015937 p-value: 7.718032859783966e-122<br/>
+Spearman correlation for saccharide BGCs: 0.5701519606735296 p-value: 4.842313343204816e-16<br/>
+Spearman correlation for terpene BGCs: 0.23408917978486965 p-value: 3.398995697880516e-07<br/>
+Spearman correlation for thiopeptide BGCs: 0.8181818181818182 p-value: 0.0038149200825507135<br/>
+
+To calculate the clustering and scaffold count metrices for BiG-SCAPE with a cutoff of 1 run and Butina clustering of 0.2 the following command: <br/>
+python calculate_clustering_metrics.py bgc_clusters/bigscape_clusters_1.csv bgc_similarities/bigscape_similarity_score_1.csv sim <br/>
+This should give the following output:<br/>
+silhouette score: 0.0911359603157673<br/>
+tanimoto silhouette score: -0.03255407071175996<br/>
+rand score: 0.9933960790439741<br/>
+adjusted rand score: 0.12926602948395538<br/>
+mutual information: 0.24402727972809218<br/>
+homogeneity score: 0.7414732913152082<br/>
+completeness score: 0.9690745697100338<br/>
+v score: 0.840131898211955<br/>
+fowlkes mallow score: 0.20629330540337384<br/>
+average normalized scaffolds per gcf: 3.3450163398692823<br/>
+average gcfs per scaffold: 1.1370338248048568<br/>
+
+To calculate the clustering metrices for BiG-SCAPE with a cutoff of 1 run and Butina clustering of 0.3 the following command: <br/>
+python calculate_clustering_metrics.py bgc_clusters/bigscape_clusters_1.csv bgc_similarities/bigscape_similarity_score_1.csv sim -c product_clusters/butina_clusters_pt3.csv<br/>
+
+The above outputs match the values for the updated dataset in the supplementary data of the paper.
+
+# 2. Reproducing manuscript results
+To reproduce the remaining manuscript results with the udpated benchmark set replace the similarity and cluster files with those of each method, the files for each method are:<br/>
+knownclusterblast: bgc_similarities/kcb_similarity_score.csv<br/>
+BiG-SCAPE 0.3 cutoff: bgc_similarities/bigscape_similarity_score_pt3.csv bgc_clusters/bigscape_clusters_pt3.csv<br/>
+BiG-SCAPE 0.5 cutoff: bgc_similarities/bigscape_similarity_score_pt5.csv bgc_clusters/bigscape_clusters_pt5.csv<br/>
+BiG-SLiCE: bgc_similarities/bigslice_scores.csv bgc_clusters/bigslice_clusters.csv<br/>
+clust-o-matic: bgc_similarities/clustomatic_scores.csv bgc_clusters/clustomatic_clusters.csv<br/>
+lsaBGC: bgc_similarities/lsaBGC_scores.csv bgc_clusters/lsaBGC_clusters.csv<br/>
+# 3. Calculating Tanimoto similarity of a database
 Note we have precalculated the tanimoto similiarities, if you want to use these precalculated values, proceed to step 2. If you want to do it yourself, you can use the calculate_structural_similarity.py script. To do this:
 run:
 
@@ -23,7 +78,7 @@ python calculate_structural_similarity.py -f source_data/MY_DATA.tsv -o tanimoto
 
 Note that your input data must follow the same format as data dowloaded from NPAtlas.
 
-# 2. Calculating similarity metrics
+# 4. Calculating similarity metrics
 To calculate similarity metrics use the bgc_sim_tanimoto_comparison.py script, this has one required option: bgc_file which should contain the similarity scores for pairs of BGCs, it needs to have the format where each line has the similarity score for a pair of BGCs in comma separate form (bgc1,bgc2,score). The bgc_similarities directory has examples for existing methods and can also be used to compare performance of new methods. To run the script run:
 
 python bgc_sim_tanimoto_comparison.py MY_BGC_DATA.csv
@@ -36,14 +91,16 @@ optional arguments are:
 
 -t and -c should be used if the user wants to calculate these metrics for their own custom dataset.
 
-# 3. Calculate clusters and scaffolds for product structures
+Note that if there are not enough pairs of a specific class to calculate a correlation coefficient the output for that class will say "nan".
+
+# 5. Calculate clusters and scaffolds for product structures
 We have provided precalculated clusters using the Butina algorithm and scaffolds using the Bemis-Murcko scaffold definition. If you want to use these precalculated clusters, proceed to 4. If you want to calculate these yourself then use the calc_product_clusters_and_scaffolds.py script by running:
 
 python calc_product_clusters_and_scaffolds.py
 
 If you want to run this on your own dataset, use the -t option to specify Tanimoto similarity file (which can be generated as described in 1) and -n to specify the database in the NPAtlas database format. Other options for this method include -c which specifies the Butina clustering threshold, -b which specifies the output file for the Butina clusters, -s which specifies the output file for scaffolds, and -st which specifies the scaffold type which include Bemis Murcko (true_bm), Cyclic Skeleton (csk), and Bajorath Bemis Murcko (bajorath). Note these scaffold types are described here: https://github.com/rdkit/rdkit/discussions/6844
 
-# 4. Calculate clustering metrics
+# 6. Calculate clustering metrics
 To calculate clustering metrics use the calculate_clustering_metrics.py script. This script has three required arguments: bgc_cluster_file which is the file containing the BGC cluster identities as determined by the method you would like to calculate metrics for, with the format BGC_id, cluster_id on each line. Examples are provided in the bgc_clusters directory. The second required argument is bgc_score_file which has the BGC similarity scores, as described above. The final required argument is score_type which is used to specify if the score in the score file is a similarity or a distance (sim for similarity dist for distance). To run the script:
 
 python calculate_clustering_metrics.py MY_BGC_CLUSTERS.csv MY_BGC_SCORES.csv SCORE_TYPE
@@ -54,3 +111,4 @@ There are also optional arguments if you would like to specify custom ground tru
 -s specifies a file that contains the scaffolds for each BGC, as calculated in step 3. Each line should have BGC_id, scaffold smiles. If there are multiple scaffolds for a BGC due to multiple products, these should each be listed on a separate line
 -o specifies the output text file
 -p specifies the output file for a histogram showing the scaffold per GCF and GCF per scaffold
+
