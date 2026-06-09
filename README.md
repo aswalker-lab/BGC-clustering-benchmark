@@ -38,7 +38,7 @@ Spearman correlation for saccharide BGCs: 0.5701519606735296 p-value: 4.84231334
 Spearman correlation for terpene BGCs: 0.23408917978486965 p-value: 3.398995697880516e-07<br/>
 Spearman correlation for thiopeptide BGCs: 0.8181818181818182 p-value: 0.0038149200825507135<br/>
 
-To calculate the clustering and scaffold count metrices for BiG-SCAPE with a cutoff of 1 run and Butina clustering of 0.2 the following command: <br/>
+To calculate the clustering and scaffold count metrics for BiG-SCAPE with a cutoff of 1 run and Butina clustering of 0.2 the following command: <br/>
 python calculate_clustering_metrics.py bgc_clusters/bigscape_clusters_1.csv bgc_similarities/bigscape_similarity_score_1.csv sim <br/>
 This should give the following output:<br/>
 silhouette score: 0.0911359603157673<br/>
